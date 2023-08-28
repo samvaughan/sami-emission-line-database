@@ -111,8 +111,21 @@ galaxy = pd.read_sql(f"select * from sami where CATID == {CATID}", con)
 # or, if we've already got the master dataframe from above:
 # galaxy = df.loc[df.CATID == CATID]
 
-fig, ax = plt.subplots()
-ax.imshow(galaxy['halpha_flux'].values.reshape(50, 50), cmap='plasma')
+# Plot the H-alpha flux for this galaxy, alongside its BPT classification for each pixel
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+fig, axs = plt.subplots(ncols=2, figsize=(14, 5))
+cmap = mpl.cm.plasma
+axs[0].imshow(galaxy['halpha_flux'].values.reshape(50, 50), cmap=cmap)
+
+bounds = [0, 1, 2, 3]
+norm = mpl.colors.BoundaryNorm(bounds, cmap.N, extend='neither')
+im = axs[1].imshow(galaxy['BPT_class'].values.reshape(50, 50), cmap=cmap, norm=norm)
+# Add some extra things
+fig.colorbar(im, ax=axs[1], label='BPT Class')
+fig.suptitle(f"{CATID}")
+axs[0].set_title("H-alpha Flux")
+axs[1].set_title("BPT Classification")
 ```
 
 which gives this:
