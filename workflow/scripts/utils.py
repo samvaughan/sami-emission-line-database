@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.stats as stats
+from astropy.io import fits
 
 
 def Kewley_2006_SF(x_ratio_name, ratio):
@@ -200,3 +201,31 @@ def p(z, mu_x, sigma_x, mu_y, sigma_y):
     p_z_part_two = 1.0 / (a_z**2 * np.pi * sigma_x * sigma_y) * np.exp(-c_z / 2)
 
     return p_z_part_one + p_z_part_two
+
+
+def load_gas_quantity(catid, quantity, data_dir, cube="default", type="1-comp"):
+    try:
+        hdu = fits.open(f"{data_dir}/{catid}_A_{quantity}_{cube}_{type}.fits")
+        img = hdu[0].data
+        error = hdu[1].data
+    except FileNotFoundError:
+        shape = (50, 50)
+        if quantity in ["Halpha", "sfr", "sfr-dens"]:
+            shape = (2, 50, 50)
+        img = np.full(shape, np.nan)
+        error = np.full(shape, np.nan)
+
+    return img, error
+
+
+def load_stellar_quantity(
+    catid, quantity, data_dir, cube="default", type="four-moment"
+):
+    hdu = fits.open(f"{data_dir}/{catid}_A_{quantity}_{cube}_{type}.fits")
+    img = hdu[0].data
+    error = hdu[1].data
+    flux = hdu[2].data
+    flux_error = hdu[3].data
+    SN = hdu[4].data
+
+    return img, error, flux, flux_error, SN

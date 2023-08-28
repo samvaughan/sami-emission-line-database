@@ -14,33 +14,6 @@ conn = sqlite3.connect(smk.input.database)
 data_dir = smk.params.data_dir
 catid = smk.wildcards.CATID
 
-
-def load_gas_quantity(catid, quantity, cube="default", type="1-comp"):
-    try:
-        hdu = fits.open(f"{data_dir}/{catid}_A_{quantity}_{cube}_{type}.fits")
-        img = hdu[0].data
-        error = hdu[1].data
-    except FileNotFoundError:
-        shape = (50, 50)
-        if quantity in ["Halpha", "sfr", "sfr-dens"]:
-            shape = (2, 50, 50)
-        img = np.full(shape, np.nan)
-        error = np.full(shape, np.nan)
-
-    return img, error
-
-
-def load_stellar_quantity(catid, quantity, cube="default", type="four-moment"):
-    hdu = fits.open(f"{data_dir}/{catid}_A_{quantity}_{cube}_{type}.fits")
-    img = hdu[0].data
-    error = hdu[1].data
-    flux = hdu[2].data
-    flux_error = hdu[3].data
-    SN = hdu[4].data
-
-    return img, error, flux, flux_error, SN
-
-
 hdu = fits.open(f"{data_dir}/{catid}_A_Halpha_default_1-comp.fits")
 
 # Get the WCS
@@ -53,33 +26,35 @@ coords = wcs_utils.pixel_to_skycoord(x, y, wcs)
 RA = coords.ra.ravel()
 DEC = coords.dec.ravel()
 
-halpha, halpha_error = load_gas_quantity(catid, "Halpha")
-hbeta, hbeta_error = load_gas_quantity(catid, "Hbeta")
-n_II, n_II_error = load_gas_quantity(catid, "NII6583")
-o_I, o_I_error = load_gas_quantity(catid, "OI6300")
-o_II, o_II_error = load_gas_quantity(catid, "OII3728")
-o_III, o_III_error = load_gas_quantity(catid, "OIII5007")
-s_II_a, s_II_a_error = load_gas_quantity(catid, "SII6716")
-s_II_b, s_II_b_error = load_gas_quantity(catid, "SII6731")
-extinct_corr, extinct_corr_error = load_gas_quantity(catid, "extinct-corr")
-gas_vdisp, gas_vdisp_error = load_gas_quantity(catid, "gas-vdisp")
-gas_vel, gas_vel_error = load_gas_quantity(catid, "gas-velocity")
-sfr, sfr_error = load_gas_quantity(catid, "sfr")
-sfr_density, sfr_density_error = load_gas_quantity(catid, "sfr-dens")
+halpha, halpha_error = utils.load_gas_quantity(catid, "Halpha", data_dir)
+hbeta, hbeta_error = utils.load_gas_quantity(catid, "Hbeta", data_dir)
+n_II, n_II_error = utils.load_gas_quantity(catid, "NII6583", data_dir)
+o_I, o_I_error = utils.load_gas_quantity(catid, "OI6300", data_dir)
+o_II, o_II_error = utils.load_gas_quantity(catid, "OII3728", data_dir)
+o_III, o_III_error = utils.load_gas_quantity(catid, "OIII5007", data_dir)
+s_II_a, s_II_a_error = utils.load_gas_quantity(catid, "SII6716", data_dir)
+s_II_b, s_II_b_error = utils.load_gas_quantity(catid, "SII6731", data_dir)
+extinct_corr, extinct_corr_error = utils.load_gas_quantity(
+    catid, "extinct-corr", data_dir
+)
+gas_vdisp, gas_vdisp_error = utils.load_gas_quantity(catid, "gas-vdisp", data_dir)
+gas_vel, gas_vel_error = utils.load_gas_quantity(catid, "gas-velocity", data_dir)
+sfr, sfr_error = utils.load_gas_quantity(catid, "sfr", data_dir)
+sfr_density, sfr_density_error = utils.load_gas_quantity(catid, "sfr-dens", data_dir)
 (
     stellar_vdisp,
     stellar_vdisp_error,
     stellar_flux,
     stellar_flux_error,
     stellar_SN,
-) = load_stellar_quantity(catid, "stellar-velocity-dispersion")
+) = utils.load_stellar_quantity(catid, "stellar-velocity-dispersion", data_dir)
 (
     stellar_vel,
     stellar_vel_error,
     _,
     _,
     _,
-) = load_stellar_quantity(catid, "stellar-velocity")
+) = utils.load_stellar_quantity(catid, "stellar-velocity", data_dir)
 
 (
     h3,
@@ -87,7 +62,7 @@ sfr_density, sfr_density_error = load_gas_quantity(catid, "sfr-dens")
     _,
     _,
     _,
-) = load_stellar_quantity(catid, "stellar-velocity-h3")
+) = utils.load_stellar_quantity(catid, "stellar-velocity-h3", data_dir)
 
 (
     h4,
@@ -95,7 +70,7 @@ sfr_density, sfr_density_error = load_gas_quantity(catid, "sfr-dens")
     _,
     _,
     _,
-) = load_stellar_quantity(catid, "stellar-velocity-h4")
+) = utils.load_stellar_quantity(catid, "stellar-velocity-h4", data_dir)
 
 table = pd.DataFrame(
     data=dict(
