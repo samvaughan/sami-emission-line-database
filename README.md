@@ -1,4 +1,4 @@
-# SAMI emission lines database for the 12th COIN residence programme
+# SAMI emission lines database for the 7th COIN residence programme
 
 This repo contains code which collates various SAMI data products into a single SQLite database, which will be used for the COIN residence program. 
 
