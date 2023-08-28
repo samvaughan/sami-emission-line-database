@@ -83,6 +83,22 @@ con = sqlite3.connect("path/to/SAMI_spaxel_data.db")
 df = pd.read_sql("select * from sami", con)
 ```
 
+Or in `R`:
+
+```R
+library(tidyverse)
+library(dbplyr)
+library(RSQLite)
+
+database  <- "/path/to/SAMI_spaxel_data.db"
+con  <-  DBI::dbConnect(RSQLite::SQLite(), database)
+
+# This 'lazily' loads, so should be very quick
+sami  <- tbl(con, 'sami')
+```
+
+You can then interact with the `sami` table as you would a normal tibble. The `R` package `dbplyr` cleverly translates your usual `tidyverse` commands into `SQL`, then only queries the database right at the end.
+
 ### Plotting a 2D map 
 
 To plot a 2D map, we can select all spaxels from a single galaxy (by its CATID) and then reshape those values into an image. All SAMI cubes have 50 pixels in the $x$ and $y$ directions, which makes our task simple:
