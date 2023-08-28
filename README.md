@@ -43,22 +43,22 @@ The table `sami` has the following columns:
 * __e_sfr__ (FLOAT): Uncertainty in SFR, measured in solar masses / year.
 * __sfr_density__ (FLOAT): Star-formation rate surface density of the spaxel, equal to SFR divided by the surface area over which it is measured. Measured in solar masses / year / kpc. 
 * __e_sfr_density__ (FLOAT): Uncertainty in the star-formation rate surface density. 
-* __halpha_flux__ (FLOAT): Flux of the H $\alpha$ emission line, found from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_halpha_flux__ (FLOAT): Uncertainty of the H $\alpha$ flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __hbeta_flux__ (FLOAT): Flux of the H $\beta$ emission line, found from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_hbeta_flux__ (FLOAT): Uncertainty of the H $\beta$ flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __NII6583_flux__ (FLOAT): Combined flux of the two Nitrogen emission lines at 6549.86 $\mathrm{A}$ and 6585.27 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit to each line (with their ratios fixed according to that from atomic physics) and then summed. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_NII6583_flux__ (FLOAT): Uncertainty on the NII flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __OI6300_flux__ (FLOAT): Flux of the \[OI] emission line at 6300 $\mathrm{A}$, found from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_OI6300_flux__ (FLOAT): Uncertainty on the \[OI] emission line flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __OII3728_flux__ (FLOAT): Combined flux of the \[OII] doublet emission lines at 3729.875 $\mathrm{A}$ and 3729.875 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit to each line and then summed. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_OII3728_flux__ (FLOAT): Uncertainty on the \[OII] emission line flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __OIII5007_flux__ (FLOAT): Combined flux of the \[OIII] doublet emission lines at 4960.295 $\mathrm{A}$ and 5008.240 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit to each line and then summed. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_OIII5007_flux__ (FLOAT): Uncertainty on the \[OIII] emission line flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __SII6716_flux__ (FLOAT): Flux of the \[SII] emission line at 6716$\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_SII6716_flux__ (FLOAT). Uncertainty on the \[SII] emission line flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __SII6731_flux__ (FLOAT): Flux of the \[SII] emission line at 6731 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
-* __e_SII6731_flux__ (FLOAT): Uncertainty on the \[SII] emission line flux. Measured in $10^{-16} \mathrm{erg}\,\mathrm{s}^{-1}\,\mathrm{cm}^{-2}\,\mathrm{A}^{-1}$.
+* __halpha_flux__ (FLOAT): Flux of the H $\alpha$ emission line, found from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_halpha_flux__ (FLOAT): Uncertainty of the H $\alpha$ flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __hbeta_flux__ (FLOAT): Flux of the H $\beta$ emission line, found from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_hbeta_flux__ (FLOAT): Uncertainty of the H $\beta$ flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __NII6583_flux__ (FLOAT): Combined flux of the two Nitrogen emission lines at 6549.86 $\mathrm{A}$ and 6585.27 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit to each line (with their ratios fixed according to that from atomic physics) and then summed. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_NII6583_flux__ (FLOAT): Uncertainty on the NII flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __OI6300_flux__ (FLOAT): Flux of the \[OI] emission line at 6300 $\mathrm{A}$, found from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_OI6300_flux__ (FLOAT): Uncertainty on the \[OI] emission line flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __OII3728_flux__ (FLOAT): Combined flux of the \[OII] doublet emission lines at 3729.875 $\mathrm{A}$ and 3729.875 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit to each line and then summed. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_OII3728_flux__ (FLOAT): Uncertainty on the \[OII] emission line flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __OIII5007_flux__ (FLOAT): Combined flux of the \[OIII] doublet emission lines at 4960.295 $\mathrm{A}$ and 5008.240 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit to each line and then summed. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_OIII5007_flux__ (FLOAT): Uncertainty on the \[OIII] emission line flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __SII6716_flux__ (FLOAT): Flux of the \[SII] emission line at 6716$\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_SII6716_flux__ (FLOAT). Uncertainty on the \[SII] emission line flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __SII6731_flux__ (FLOAT): Flux of the \[SII] emission line at 6731 $\mathrm{A}$. The flux is derived from a _single_ Gaussian component fit. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
+* __e_SII6731_flux__ (FLOAT): Uncertainty on the \[SII] emission line flux. Measured in $10^{-16} \mathrm{erg} \mathrm{s}^{-1} \mathrm{cm}^{-2} \mathrm{A}^{-1}$.
 * __extinct_corr__ (FLOAT): The measured dust extinction in the spectrum, derived using the Balmer decrement (the ratio of H $\beta$ to H $\alpha$ flux). Units are magnitudes. 
 * __e_extinct_corr__ (FLOAT): Uncertainty in the exitinction correction. 
 * __log10_NII_Halpha__ (FLOAT): Log base 10 of the ratio between the \[NII] and H $\alpha$ fluxes.
