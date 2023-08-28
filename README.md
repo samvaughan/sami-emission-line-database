@@ -9,7 +9,9 @@ This repo _doesn't_ contain the individual SAMI dataproducts or the final databa
 The scripts to build the database are in `workflow/scripts`. They do the following:
 
     * `make_database.py` sets up a new SQLite database with the appropriate columns
+
     * `add_galaxy_data_to_db.py` reads in the various gas and star measurements for a single SAMI galaxy, adds some extra columns (i.e. calculates some important emission line ratios and adds the BPT classification for each spaxel) and then adds this data to the master database.
+    
     * `utils.py` contains utility functions which are used by `add_galaxy_data_to_db.py`. In particular, it contains the functions which do the BPT classifications based on different emission line ratios. It also contains functions which read in the raw data, as well as a few things I've been playing around with (and aren't used yet). 
 
 ## Using the database to get the data
