@@ -115,13 +115,19 @@ galaxy = pd.read_sql(f"select * from sami where CATID == {CATID}", con)
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 fig, axs = plt.subplots(ncols=2, figsize=(14, 5))
-cmap = mpl.cm.plasma
+
+# Plot the flux map
 axs[0].imshow(galaxy['halpha_flux'].values.reshape(50, 50), cmap=cmap)
 
+# Make stuff for the BPT colorbar
+cmap = mpl.cm.plasma
 bounds = [0, 1, 2, 3]
 norm = mpl.colors.BoundaryNorm(bounds, cmap.N, extend='neither')
+
+# Plot the classes
 im = axs[1].imshow(galaxy['BPT_class'].values.reshape(50, 50), cmap=cmap, norm=norm)
-# Add some extra things
+
+# Add some extra titles and a colorbar
 fig.colorbar(im, ax=axs[1], label='BPT Class')
 fig.suptitle(f"{CATID}")
 axs[0].set_title("H-alpha Flux")
