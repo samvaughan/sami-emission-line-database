@@ -1,4 +1,4 @@
-# Code to add SAMI dataproducts into a simple SQLite database
+# SAMI emission lines database for the 12th COIN residence programme
 
 This repo contains code which collates various SAMI data products into a single SQLite database, which will be used for the COIN residence program. 
 
@@ -71,7 +71,7 @@ The table `sami` has the following columns:
 
 ## Using the database to get the data
 
-Once you have access to `SAMI_spaxel_data.db`, one way to interact with it is as follows:
+Once you have access to `SAMI_spaxel_data.db`, you can interact with it like any other SQL database. If you use `python` and the `pandas` package, one way to interact with it is as follows:
 
 ```python
 import sqlite3
@@ -79,6 +79,7 @@ import pandas as pd
 
 con = sqlite3.connect("path/to/SAMI_spaxel_data.db")
 # Note that this selects all rows and columns and will take ~1 minute
+# You can use any valid SQL statement here, and the results are returned into a pandas dataframe.
 df = pd.read_sql("select * from sami", con)
 ```
 
@@ -100,15 +101,16 @@ ax.imshow(galaxy['halpha_flux'].values.reshape(50, 50), cmap='plasma')
 
 ## Getting rid of NaNs 
 
-You'll notice that a large chunk of rows for each galaxy are just NaNs. This is due to the fact that the reduced data cubes for each galaxy are, well, cubes, but the footprint of the SAMI instrument is circular (hexagonal, actually, but the final galaxies have round cutouts after the dithering and stacking of 7 observations). The data is therefore padded with NaNs to make it fit into a square allocation in memory.
+You'll notice that a large chunk of rows for each galaxy are just NaNs. This is due to the fact that the reduced data for each galaxy square arrays but the footprint of the SAMI instrument is circular (hexagonal, actually, but the final galaxies have round cutouts after the dithering and stacking of 7 observations). The data is therefore padded with NaNs to make it fit into a square allocation in memory.
 
 To drop these NaN values, you can use the following:
 
 ```python
+# Select the columns you want to drop NaN values from
 df_no_NaNs = df.dropna(subset=['halpha_flux', 'hbeta_flux', 'BPT_classification', 'etc...']
 ```
 
-However you'll see that you _can't_ easily plot a 2D image from this dataframe, because the spectra for each individual galaxies no longer make a nice square numpy array:
+However you'll see that you _can't_ easily plot a 2D image from this dataframe, because the spectra for each individual galaxies no longer make a nice square `numpy` array:
 
 ```python
 # This won't work!
