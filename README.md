@@ -130,7 +130,7 @@ axs[1].set_title("BPT Classification")
 
 which gives this:
 
-![example H-alpha flux map for galaxy 623679](resources/images/example_halpha_map.png)
+![example H-alpha flux map for galaxy 623679](resources/images/example_image.png)
 
 ## Getting rid of NaNs 
 
