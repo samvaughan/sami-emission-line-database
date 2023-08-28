@@ -82,5 +82,46 @@ con = sqlite3.connect("path/to/SAMI_spaxel_data.db")
 df = pd.read_sql("select * from sami", con)
 ```
 
+### Plotting a 2D map 
 
+To plot a 2D map, we can select all spaxels from a single galaxy (by its CATID) and then reshape those values into an image. All SAMI cubes have 50 pixels in the $x$ and $y$ directions, which makes our task simple:
 
+```python
+# Pick a random galaxy
+CATID = 623679
+
+galaxy = pd.read_sql(f"select * from sami where CATID == {CATID}", con)
+# or, if we've already got the master dataframe from above:
+# galaxy = df.loc[df.CATID == CATID]
+
+fig, ax = plt.subplots()
+ax.imshow(galaxy['halpha_flux'].values.reshape(50, 50), cmap='plasma')
+```
+
+## Getting rid of NaNs 
+
+You'll notice that a large chunk of rows for each galaxy are just NaNs. This is due to the fact that the reduced data cubes for each galaxy are, well, cubes, but the footprint of the SAMI instrument is circular (hexagonal, actually, but the final galaxies have round cutouts after the dithering and stacking of 7 observations). The data is therefore padded with NaNs to make it fit into a square allocation in memory.
+
+To drop these NaN values, you can use the following:
+
+```python
+df_no_NaNs = df.dropna(subset=['halpha_flux', 'hbeta_flux', 'BPT_classification', 'etc...']
+```
+
+However you'll see that you _can't_ easily plot a 2D image from this dataframe, because the spectra for each individual galaxies no longer make a nice square numpy array:
+
+```python
+# This won't work!
+plt.imshow(df_no_NaNs[df_no_NaNs['CATID'] == CATID, 'halpha_flux'].values.reshape(50, 50))
+```
+```bash
+ValueError: cannot reshape array of size 1234 into shape (50,50)
+```
+
+What you can do is plot the RA/DEC or $x$ and $y$ positions of each spectrum, and colour the points based on some other attribute:
+
+```python
+galaxy = df_no_NaNs[df_no_NaNs['CATID'] == CATID]
+# This will work
+plt.scatter(galaxy['RA'], galaxy['DEC'], c=galaxy['halpha_flux'])
+```
