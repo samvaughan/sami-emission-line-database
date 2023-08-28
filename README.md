@@ -97,7 +97,7 @@ con  <-  DBI::dbConnect(RSQLite::SQLite(), database)
 sami  <- tbl(con, 'sami')
 ```
 
-You can then interact with the `sami` table as you would a normal tibble. The `R` package `dbplyr` cleverly translates your usual `tidyverse` commands into `SQL`, then only queries the database right at the end.
+You can then interact with the `sami` table as you would a normal tibble. The `R` package `dbplyr` cleverly translates your usual `tidyverse` commands into `SQL`, then only queries the database right at the end. See the introduction [here](https://dbplyr.tidyverse.org/articles/dbplyr.html).
 
 ### Plotting a 2D map 
 
