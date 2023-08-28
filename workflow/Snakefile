@@ -1,0 +1,26 @@
+import pandas as pd
+
+catids = pd.read_csv("resources/galaxy_list.csv")['CATID']
+
+rule all:
+    input:
+        database="results/SAMI_spaxel_data.db",
+        flags=expand("results/flags/{CATID}_done.flag", CATID=catids)
+
+rule make_database:
+    message: "Make the empty SAMI database"
+    output:
+        database=rules.all.input.database
+    script:
+        "scripts/make_database.py"
+
+rule add_to_db:
+    message: "Adding CATID {wildcards.CATID} to database"
+    input:
+        database=rules.all.input.database
+    output:
+        flag_file="results/flags/{CATID}_done.flag"
+    params:
+        data_dir="resources/dr3/ifs/{CATID}"
+    script:
+        "scripts/add_galaxy_data_to_db.py"

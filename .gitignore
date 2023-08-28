@@ -1,0 +1,4 @@
+resources/dr3/*
+.snakemake
+*.db
+*.flag
