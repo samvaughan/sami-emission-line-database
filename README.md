@@ -115,6 +115,10 @@ fig, ax = plt.subplots()
 ax.imshow(galaxy['halpha_flux'].values.reshape(50, 50), cmap='plasma')
 ```
 
+which gives this:
+
+![example H-alpha flux map for galaxy 623679](resources/images/example_halpha_map.png)
+
 ## Getting rid of NaNs 
 
 You'll notice that a large chunk of rows for each galaxy are just NaNs. This is due to the fact that the reduced data for each galaxy square arrays but the footprint of the SAMI instrument is circular (hexagonal, actually, but the final galaxies have round cutouts after the dithering and stacking of 7 observations). The data is therefore padded with NaNs to make it fit into a square allocation in memory.
